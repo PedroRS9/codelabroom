@@ -15,12 +15,14 @@
  */
 package com.example.busschedule.data
 
+import androidx.annotation.NonNull
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
+@Entity(tableName = "schedule")
 data class BusSchedule(
     @PrimaryKey val id: Int,
-    val stopName: String,
-    val arrivalTimeInMillis: Int
+    @NonNull @ColumnInfo(name="stop_name") val stopName: String,
+    @NonNull @ColumnInfo(name="arrival_time") val arrivalTimeInMillis: Int
 )

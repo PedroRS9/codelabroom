@@ -1,12 +1,14 @@
+package com.example.busschedule.data
+
 import androidx.room.Dao
 import androidx.room.Query
-import com.example.busschedule.data.BusSchedule
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface BusScheduleDao {
-    @Query("SELECT * FROM BusSchedule ORDER BY arrivalTimeInMillis")
-    suspend fun getAll(): List<BusSchedule>
+    @Query("SELECT * FROM schedule ORDER BY arrival_time ASC ")
+    fun getAll(): Flow<List<BusSchedule>>
 
-    @Query("SELECT * FROM BusSchedule WHERE stopName = :stopName")
-    suspend fun getByStopName(stopName: String): BusSchedule?
+    @Query("SELECT * FROM schedule WHERE stop_name = :stopName ORDER BY arrival_time ASC")
+    fun getByStopName(stopName: String): Flow<List<BusSchedule>>
 }
